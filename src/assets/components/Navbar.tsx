@@ -11,13 +11,13 @@ import brain from "../images/ElevateBrain.png";
 function Navbar() {
   const navi = useNavigate();
   return (
-    <AppBar position="static" style={{ width: "100%", background: "#03254c" }}>
+    <AppBar position="static" style={{ width: "100%", background: "#646cff" }}>
       <Toolbar>
         <Typography variant="h6" style={{ flexGrow: 1 }}>
           <img
             src={brain}
             alt="Descriptive Alt Text"
-            style={{ maxWidth: "50px", maxHeight: "50px" }}
+            style={{ maxWidth: "70px", maxHeight: "70px" }}
           />
         </Typography>
         <Button color="inherit" component={Link} to="/logging">
