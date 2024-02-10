@@ -1,28 +1,64 @@
-import { useEffect } from "react";
+import { Modal, ModalClose, Typography } from "@mui/joy";
+import Sheet from "@mui/joy/Sheet/Sheet";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Login from "../assets/components/login";
+import brain from "../assets/images/ElevateBrain.png";
 
-const Landing = () => {
+const Landing = ({ setToken }: any) => {
+  const [openModal, setModal] = useState<any>(false);
   const navi = useNavigate();
   const butfun = () => {
-    navi("./home");
+    setModal(true);
   };
-  // useEffect(() => {
-  //   navi("/routine");
-  // }, []);
 
   return (
     <>
       <div
         style={{
-          backgroundSize: "cover",
-          backgroundPosition: "left top",
-          height: "100%",
+          display: "flex", // Enable flexbox
+          flexDirection: "column",
+          justifyContent: "center", // Center horizontally
+          alignItems: "center", // Center vertically
+          height: "100vh", // Full viewport height
           overflow: "scroll",
-          // backgroundColor: "#2d3238",
-          backgroundColor: "white",
+          backgroundColor: "#212121",
         }}
       >
+        <img
+          src={brain}
+          className="logo"
+          alt="Descriptive Alt Text"
+          style={{ maxWidth: "100%", maxHeight: "100%" }}
+        />
+        <h1
+          style={{
+            color: "white",
+            fontSize: "40px",
+            fontWeight: "700",
+            textAlign: "center",
+            margin: "5px 0",
+            fontFamily: "Poppins, sans-serif",
+          }}
+        >
+          ELEVATE
+        </h1>
+
+        <Modal
+          aria-labelledby="modal-title"
+          aria-describedby="modal-desc"
+          open={openModal}
+          onClose={() => setModal(false)}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Login setToken={setToken} />
+        </Modal>
         <button
+          className="sayhello"
           onClick={butfun}
           style={{
             position: "absolute",

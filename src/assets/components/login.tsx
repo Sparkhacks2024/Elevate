@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
-import "../assets/css files/login.css";
-import { supabase } from "../utils/client.ts";
+import "../../assets/css files/login.css";
+import { supabase } from "../../utils/client.ts";
+import { useNavigate } from "react-router-dom";
 
 function Login({ setToken }: any) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navi = useNavigate();
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
@@ -26,6 +27,7 @@ function Login({ setToken }: any) {
       } else {
         console.log("Logged in", data.session);
         setToken(data.session);
+        navi("/logging");
       }
     } catch (error) {
       //catch block
@@ -38,12 +40,12 @@ function Login({ setToken }: any) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
+        height: "50vh",
       }}
     >
       <div
         className="profile"
-        style={{ width: "300px", height: "500px", display: "flex" }}
+        style={{ width: "400px", height: "500px", display: "flex" }}
       >
         <h2>Login</h2>
 
@@ -97,11 +99,24 @@ function Login({ setToken }: any) {
               required
             ></input>
           </div>
-
-          <button type="submit" style={{ margin: "20px 10px" }}>
-            Sign in
-          </button>
-          <button style={{ margin: "20px 10px" }}>Create Account</button>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <button className="sayhello" style={{ margin: "20px 10px" }}>
+              Create Account
+            </button>
+            <button
+              className="sayhello"
+              type="submit"
+              style={{ margin: "20px 10px" }}
+            >
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     </div>

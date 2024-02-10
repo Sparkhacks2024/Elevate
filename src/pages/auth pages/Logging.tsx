@@ -66,7 +66,7 @@ function Logging({ Token }: any) {
           backgroundSize: "cover",
           backgroundPosition: "left top",
           height: "100%",
-          backgroundColor: "white",
+          backgroundColor: "#212121",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
