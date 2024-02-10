@@ -10,6 +10,7 @@ import Option from "@mui/joy/Option";
 import "bootstrap/dist/css/bootstrap.css";
 import Button from "@mui/joy/Button";
 import CloseIcon from "@mui/icons-material/Close";
+import Navbar from "../../assets/components/Navbar";
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
@@ -47,95 +48,103 @@ function Logging({ Token }: any) {
   }, []);
 
   return (
-    <div
-      style={{
-        backgroundSize: "cover",
-        backgroundPosition: "left top",
-        height: "100%",
-        backgroundColor: "white",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      {Todayroutine === null ? (
-        <div style={{ marginTop: "100px" }}>
-          <Select
-            placeholder="Select Today's Routine"
-            indicator={<KeyboardArrowDown />}
-            value={Todayroutine}
-            sx={{
-              width: 240,
-              [`& .${selectClasses.indicator}`]: {
-                transition: "0.2s",
-                [`&.${selectClasses.expanded}`]: {
-                  transform: "rotate(-180deg)",
+    <>
+      <Navbar />
+      <div
+        style={{
+          backgroundSize: "cover",
+          backgroundPosition: "left top",
+          height: "100%",
+          backgroundColor: "white",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {Todayroutine === null ? (
+          <div style={{ marginTop: "100px" }}>
+            <Select
+              placeholder="Select Today's Routine"
+              indicator={<KeyboardArrowDown />}
+              value={Todayroutine}
+              sx={{
+                width: 240,
+                [`& .${selectClasses.indicator}`]: {
+                  transition: "0.2s",
+                  [`&.${selectClasses.expanded}`]: {
+                    transform: "rotate(-180deg)",
+                  },
                 },
-              },
-            }}
-          >
-            {Routines.map((routine: any, index: any) => (
-              <Option
-                key={index}
-                value={index}
-                onClick={async () => {
-                  await supabase.from("logs").insert({
-                    uuid: Token.user.id,
-                    created_at: dayjs().startOf("day").format("YYYY-MM-DD"),
-                    todays_lifts: Routines[index],
-                  });
+              }}
+            >
+              {Routines.map((routine: any, index: any) => (
+                <Option
+                  key={index}
+                  value={index}
+                  onClick={async () => {
+                    await supabase.from("logs").insert({
+                      uuid: Token.user.id,
+                      created_at: dayjs().startOf("day").format("YYYY-MM-DD"),
+                      todays_lifts: Routines[index],
+                    });
 
-                  setTodayroutine(Routines[index]);
-                  console.log(Todayroutine);
-                }}
-              >
-                {routine.Name}
-              </Option>
-            ))}
-          </Select>
-        </div>
-      ) : (
-        <div style={{ marginTop: "100px", border: "" }}>
-          <table className="table">
-            <thead>
-              <tr>
-                <th scope="col">Delete</th>
-                <th scope="col">Name</th>
-                <th scope="col">Sets</th>
-                <th scope="col">Reps</th>
-                <th scope="col">Weight</th>
-                <th scope="col">Complete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Todayroutine.routine.map((item: any, index: any) => (
-                <tr className={item.Complete ? "table-success" : ""}>
-                  <td>
-                    <Button
-                      size="sm"
-                      sx={{ minWidth: 0, width: "24px", height: "10px", p: 0 }}
-                    >
-                      <CloseIcon sx={{ fontSize: "15px" }} />
-                    </Button>
-                  </td>
-                  <th scope="row">{item.Exercise}</th>
-                  <td>{item.Sets}</td>
-                  <td>{item.Reps}</td>
-                  <td>{item.weight}</td>
-                  <td>
-                    <Checkbox
-                      color="primary"
-                      defaultChecked={item.Complete ? true : false}
-                      sx={{ marginLeft: "20px" }}
-                    />
-                  </td>
-                </tr>
+                    setTodayroutine(Routines[index]);
+                    console.log(Todayroutine);
+                  }}
+                >
+                  {routine.Name}
+                </Option>
               ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-    </div>
+            </Select>
+          </div>
+        ) : (
+          <div style={{ marginTop: "100px", border: "" }}>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th scope="col">Delete</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Sets</th>
+                  <th scope="col">Reps</th>
+                  <th scope="col">Weight</th>
+                  <th scope="col">Complete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Todayroutine.routine.map((item: any, index: any) => (
+                  <tr className={item.Complete ? "table-success" : ""}>
+                    <td>
+                      <Button
+                        size="sm"
+                        sx={{
+                          minWidth: 0,
+                          width: "24px",
+                          height: "10px",
+                          p: 0,
+                        }}
+                      >
+                        <CloseIcon sx={{ fontSize: "15px" }} />
+                      </Button>
+                    </td>
+                    <th scope="row">{item.Exercise}</th>
+                    <td>{item.Sets}</td>
+                    <td>{item.Reps}</td>
+                    <td>{item.weight}</td>
+                    <td>
+                      <Checkbox
+                        color="primary"
+                        defaultChecked={item.Complete ? true : false}
+                        sx={{ marginLeft: "20px" }}
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 export default Logging;
