@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import * as React from "react";
+
 import dayjs, { Dayjs } from "dayjs";
 import Badge from "@mui/material/Badge";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -11,7 +11,8 @@ import { DayCalendarSkeleton } from "@mui/x-date-pickers/DayCalendarSkeleton";
 import { supabase } from "../../utils/client";
 import "bootstrap/dist/css/bootstrap.css";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Checkbox from "@mui/joy/Checkbox";
 
 function DateCalendarServerRequest({ Token }: any) {
   //const toastTrigger = document.getElementById("liveToastBtn");
@@ -85,9 +86,9 @@ function DateCalendarServerRequest({ Token }: any) {
     );
   }
 
-  const requestAbortController = React.useRef<AbortController | null>(null);
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [highlightedDays, setHighlightedDays] = React.useState([0]);
+  const requestAbortController = useRef<AbortController | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [highlightedDays, setHighlightedDays] = useState([0]);
   const fetchHighlightedDays = (date: Dayjs) => {
     const controller = new AbortController();
     fakeFetch(date, {
@@ -106,8 +107,11 @@ function DateCalendarServerRequest({ Token }: any) {
 
     requestAbortController.current = controller;
   };
+  useEffect(() => {
+    console.log(thatday);
+  });
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchHighlightedDays(initialValue);
 
     // abort request on unmount
@@ -132,9 +136,6 @@ function DateCalendarServerRequest({ Token }: any) {
       setIsClicked(true);
 
       const fetchData = async () => {
-        const temprows: any[] = [];
-        const mealtemprows: any[] = [];
-
         const { data } = await supabase
           .from("logs")
           .select("todays_lifts")
@@ -147,26 +148,24 @@ function DateCalendarServerRequest({ Token }: any) {
               setthatday([]);
               setIsClicked(false);
             } else {
+              setthatday([]);
               setthatday(data[0].todays_lifts.routine);
             }
-
-            //meals calender
           }
         }
       };
 
       fetchData();
     } else {
-      //toastBootstrap.show();
       setIsClicked(false);
 
       setthatday([]);
     }
-
-    //console.log("Selected Date:", date.$D); // Log the selected date to the console
   }
   return (
-    <div>
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
       <div
         style={{
           display: "inline-block",
@@ -197,6 +196,42 @@ function DateCalendarServerRequest({ Token }: any) {
           />
         </LocalizationProvider>
       </div>
+
+      {IsClicked ? (
+        <div style={{ padding: "20px" }}>
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Sets</th>
+                <th scope="col">Reps</th>
+                <th scope="col">Weight</th>
+                <th scope="col">Complete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {thatday.map((item: any, index: any) => (
+                <tr key={index}>
+                  <th scope="row">{item.Exercise}</th>
+                  <td>{item.Sets}</td>
+                  <td>{item.Reps}</td>
+                  <td>{item.weight}</td>
+                  <td>
+                    <Checkbox
+                      disabled
+                      color="primary"
+                      defaultChecked={item.Complete ? true : false}
+                      sx={{ marginLeft: "20px" }}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
