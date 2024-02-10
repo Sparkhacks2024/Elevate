@@ -1,11 +1,11 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import Landing from "./pages/Landing.tsx";
 import Login from "./pages/login.tsx";
 import Logging from "./pages/auth pages/Logging.tsx";
 import MyRoutine from "./pages/auth pages/my_routines.tsx";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
-import Navbar from "./assets/components/Navbar.tsx";
+import Fourofour from "./pages/Fourofour.tsx";
 const App = () => {
   const tokenCookie = Cookies.get("Token");
   const [Token, setToken] = useState(
@@ -37,6 +37,7 @@ const App = () => {
         ) : (
           ""
         )}
+        <Route path="*" element={<Fourofour />} />
       </Routes>
     </BrowserRouter>
   );
