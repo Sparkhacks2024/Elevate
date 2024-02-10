@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import "../assets/css files/login.css";
 import { supabase } from "../utils/client.ts";
 
-function Login() {
+function Login({ setToken }: any) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,8 +24,8 @@ function Login() {
         setEmail("");
         setPassword("");
       } else {
-        console.log("Logged in");
-        // setToken(data.session);
+        console.log("Logged in", data.session);
+        setToken(data.session);
       }
     } catch (error) {
       //catch block

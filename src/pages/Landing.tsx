@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Landing = () => {
@@ -5,6 +6,9 @@ const Landing = () => {
   const butfun = () => {
     navi("./home");
   };
+  // useEffect(() => {
+  //   navi("/routine");
+  // }, []);
 
   return (
     <>
