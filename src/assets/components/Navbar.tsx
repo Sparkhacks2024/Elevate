@@ -21,10 +21,13 @@ function Navbar() {
           />
         </Typography>
         <Button color="inherit" component={Link} to="/logging">
-          Log Workout
+          Log
         </Button>
         <Button color="inherit" component={Link} to="/routine">
-          My Routines
+          Routines
+        </Button>
+        <Button color="inherit" component={Link} to="/calendar">
+          Calendar
         </Button>
         <Button
           onClick={() => {

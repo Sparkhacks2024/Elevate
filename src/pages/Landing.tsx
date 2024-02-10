@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Modal } from "@mui/joy";
+import { Modal, Typography } from "@mui/joy";
 
 import { useState } from "react";
 
@@ -30,21 +30,32 @@ const Landing = ({ setToken }: any) => {
           src={brain}
           className="logo"
           alt="Descriptive Alt Text"
-          style={{ maxWidth: "100%", maxHeight: "100%" }}
+          style={{ maxWidth: "100%", maxHeight: "100%", position: "absolute" }}
         />
-        <h1
-          style={{
-            color: "white",
-            fontSize: "40px",
-            fontWeight: "700",
-            textAlign: "center",
-            margin: "5px 0",
-            fontFamily: "Poppins, sans-serif",
-          }}
-        >
-          ELEVATE
-        </h1>
-
+        <div style={{ zIndex: 2, background: "white" }}>
+          <h1
+            style={{
+              color: "#212121",
+              fontSize: "40px",
+              fontWeight: "700",
+              textAlign: "center",
+              margin: "5px 0",
+              fontFamily: "Poppins, sans-serif",
+              zIndex: 3,
+            }}
+          >
+            ELEVATE
+          </h1>
+          <Typography sx={{ color: "#212121", zIndex: 3 }}>
+            Unlock the secret to a happier, healthier you with exercise! Wave
+            goodbye to stress and welcome a boost in mood, thanks to the magic
+            of endorphins. From enhancing sleep to sharpening your mind, regular
+            physical activity is your all-in-one solution for mental wellness.
+            Join us now and embark on a journey towards resilience and joy.
+            Exercise isn't just good for the body—it's your mental health's best
+            friend. Let's get moving and transform today!
+          </Typography>
+        </div>
         <Modal
           aria-labelledby="modal-title"
           aria-describedby="modal-desc"
