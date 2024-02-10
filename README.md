@@ -27,7 +27,7 @@ Long-Term Benefits: Regular physical activity is associated with long-term mood,
 
 
 ### Instructions for terminal (ensure you have node installed): 
-Clone Git Repo
-npm install
-npm run dev
-Click link provided in output
+Clone Git Repo.
+npm install.
+npm run dev.
+Click link provided in output.
