@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
-import "../assets/css files/login.css";
-import { supabase } from "../utils/client.ts";
+import "../../assets/css files/login.css";
+import { supabase } from "../../utils/client.ts";
+import { useNavigate } from "react-router-dom";
 
 function Login({ setToken }: any) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navi = useNavigate();
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
@@ -26,6 +27,7 @@ function Login({ setToken }: any) {
       } else {
         console.log("Logged in", data.session);
         setToken(data.session);
+        navi("/logging");
       }
     } catch (error) {
       //catch block
@@ -38,7 +40,7 @@ function Login({ setToken }: any) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
+        height: "50vh",
       }}
     >
       <div

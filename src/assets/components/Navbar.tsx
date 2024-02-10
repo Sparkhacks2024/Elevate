@@ -29,7 +29,7 @@ function Navbar() {
           }}
           color="inherit"
           component={Link}
-          to="/home"
+          to="/"
         >
           <LogoutIcon />
         </Button>

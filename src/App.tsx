@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import Landing from "./pages/Landing.tsx";
-import Login from "./pages/login.tsx";
+import Login from "./assets/components/login.tsx";
 import Logging from "./pages/auth pages/Logging.tsx";
 import MyRoutine from "./pages/auth pages/my_routines.tsx";
 import Cookies from "js-cookie";
@@ -24,9 +24,8 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<Landing />} />
+        <Route index element={<Landing setToken={setToken} />} />
 
-        <Route path="/home" element={<Login setToken={setToken} />} />
         {Token ? (
           <Route path="/routine" element={<MyRoutine Token={Token} />} />
         ) : (
