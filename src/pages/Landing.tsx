@@ -1,13 +1,14 @@
-import { Modal, ModalClose, Typography } from "@mui/joy";
-import Sheet from "@mui/joy/Sheet/Sheet";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Modal } from "@mui/joy";
+
+import { useState } from "react";
+
 import Login from "../assets/components/login";
 import brain from "../assets/images/ElevateBrain.png";
 
 const Landing = ({ setToken }: any) => {
   const [openModal, setModal] = useState<any>(false);
-  const navi = useNavigate();
+
   const butfun = () => {
     setModal(true);
   };

@@ -1,6 +1,6 @@
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Landing from "./pages/Landing.tsx";
-import Login from "./assets/components/login.tsx";
+
 import Logging from "./pages/auth pages/Logging.tsx";
 import MyRoutine from "./pages/auth pages/my_routines.tsx";
 import Cookies from "js-cookie";

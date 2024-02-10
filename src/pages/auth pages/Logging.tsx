@@ -19,6 +19,8 @@ import DialogActions from "@mui/joy/DialogActions";
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
 import Navbar from "../../assets/components/Navbar";
 
+import "../../index.css";
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 //Start of the function
@@ -109,7 +111,15 @@ function Logging({ Token }: any) {
             </Select>
           </div>
         ) : (
-          <div style={{ marginTop: "100px", border: "" }}>
+          <div
+            className="card-1"
+            style={{
+              marginTop: "100px",
+              border: "",
+              borderRadius: "10px",
+              background: "white",
+            }}
+          >
             <Modal
               open={opendeletemodal}
               onClose={() => setopendeletemodal(false)}
@@ -173,75 +183,79 @@ function Logging({ Token }: any) {
                 </DialogActions>
               </ModalDialog>
             </Modal>
-            <h3 style={{ marginLeft: "10px" }}>{Todayroutine.Name}</h3>
-            <table className="table">
-              <thead>
-                <tr>
-                  <th scope="col">Delete</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Sets</th>
-                  <th scope="col">Reps</th>
-                  <th scope="col">Weight</th>
-                  <th scope="col">Complete</th>
-                </tr>
-              </thead>
-              <tbody>
-                {Todayroutine.routine.map((item: any, index: any) => (
-                  <tr key={index}>
-                    <td>
-                      <Button
-                        color="danger"
-                        size="sm"
-                        sx={{
-                          minWidth: 0,
-                          width: "30px",
-                          height: "24px",
-                          p: 0,
-                          maxHeight: "24px",
-                        }}
-                        onClick={() => {
-                          setdeleteindex(index);
-                          setopendeletemodal(true);
-                        }}
-                      >
-                        <CloseIcon sx={{ fontSize: "15px" }} />
-                      </Button>
-                    </td>
-                    <th scope="row">{item.Exercise}</th>
-                    <td>{item.Sets}</td>
-                    <td>{item.Reps}</td>
-                    <td>{item.weight}</td>
-                    <td>
-                      <Checkbox
-                        color="primary"
-                        defaultChecked={item.Complete ? true : false}
-                        sx={{ marginLeft: "20px" }}
-                        onChange={(event) => {
-                          if (event.target.checked) {
-                            Todayroutine.routine[index].Complete = true;
-                          } else {
-                            Todayroutine.routine[index].Complete = false;
-                          }
-
-                          const temp = Todayroutine;
-                          const update = async () => {
-                            await supabase
-                              .from("logs")
-                              .update({ todays_lifts: temp })
-                              .eq("uuid", Token.user.id)
-                              .eq(
-                                "created_at",
-                                dayjs().startOf("day").format("YYYY-MM-DD")
-                              );
-                          };
-                          update();
-                        }}
-                      />
-                    </td>
+            <h3 style={{ marginLeft: "10px", marginTop: "10px" }}>
+              {Todayroutine.Name}
+            </h3>
+            <div style={{ padding: "20px" }}>
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Delete</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Sets</th>
+                    <th scope="col">Reps</th>
+                    <th scope="col">Weight</th>
+                    <th scope="col">Complete</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {Todayroutine.routine.map((item: any, index: any) => (
+                    <tr key={index}>
+                      <td>
+                        <Button
+                          color="danger"
+                          size="sm"
+                          sx={{
+                            minWidth: 0,
+                            width: "30px",
+                            height: "24px",
+                            p: 0,
+                            maxHeight: "24px",
+                          }}
+                          onClick={() => {
+                            setdeleteindex(index);
+                            setopendeletemodal(true);
+                          }}
+                        >
+                          <CloseIcon sx={{ fontSize: "15px" }} />
+                        </Button>
+                      </td>
+                      <th scope="row">{item.Exercise}</th>
+                      <td>{item.Sets}</td>
+                      <td>{item.Reps}</td>
+                      <td>{item.weight}</td>
+                      <td>
+                        <Checkbox
+                          color="primary"
+                          defaultChecked={item.Complete ? true : false}
+                          sx={{ marginLeft: "20px" }}
+                          onChange={(event) => {
+                            if (event.target.checked) {
+                              Todayroutine.routine[index].Complete = true;
+                            } else {
+                              Todayroutine.routine[index].Complete = false;
+                            }
+
+                            const temp = Todayroutine;
+                            const update = async () => {
+                              await supabase
+                                .from("logs")
+                                .update({ todays_lifts: temp })
+                                .eq("uuid", Token.user.id)
+                                .eq(
+                                  "created_at",
+                                  dayjs().startOf("day").format("YYYY-MM-DD")
+                                );
+                            };
+                            update();
+                          }}
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
       </div>
