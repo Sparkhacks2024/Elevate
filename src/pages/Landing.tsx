@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Login from "../assets/components/login";
 import brain from "../assets/images/ElevateBrain.png";
 
-const Landing = ({ setToken }) => {
+const Landing = ({ setToken }: any) => {
   const [openModal, setModal] = useState<any>(false);
   const navi = useNavigate();
   const butfun = () => {
@@ -22,16 +22,18 @@ const Landing = ({ setToken }) => {
           alignItems: "center", // Center vertically
           height: "100vh", // Full viewport height
           overflow: "scroll",
-          backgroundColor: "white",
+          backgroundColor: "#212121",
         }}
       >
         <img
           src={brain}
+          className="logo"
           alt="Descriptive Alt Text"
           style={{ maxWidth: "100%", maxHeight: "100%" }}
         />
         <h1
           style={{
+            color: "white",
             fontSize: "40px",
             fontWeight: "700",
             textAlign: "center",
@@ -56,6 +58,7 @@ const Landing = ({ setToken }) => {
           <Login setToken={setToken} />
         </Modal>
         <button
+          className="sayhello"
           onClick={butfun}
           style={{
             position: "absolute",

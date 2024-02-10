@@ -106,8 +106,14 @@ function Login({ setToken }: any) {
               alignItems: "center",
             }}
           >
-            <button style={{ margin: "20px 10px" }}>Create Account</button>
-            <button type="submit" style={{ margin: "20px 10px" }}>
+            <button className="sayhello" style={{ margin: "20px 10px" }}>
+              Create Account
+            </button>
+            <button
+              className="sayhello"
+              type="submit"
+              style={{ margin: "20px 10px" }}
+            >
               Submit
             </button>
           </div>
