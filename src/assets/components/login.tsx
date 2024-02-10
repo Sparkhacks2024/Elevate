@@ -45,7 +45,7 @@ function Login({ setToken }: any) {
     >
       <div
         className="profile"
-        style={{ width: "300px", height: "500px", display: "flex" }}
+        style={{ width: "400px", height: "500px", display: "flex" }}
       >
         <h2>Login</h2>
 
@@ -99,11 +99,18 @@ function Login({ setToken }: any) {
               required
             ></input>
           </div>
-
-          <button type="submit" style={{ margin: "20px 10px" }}>
-            Sign in
-          </button>
-          <button style={{ margin: "20px 10px" }}>Create Account</button>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <button style={{ margin: "20px 10px" }}>Create Account</button>
+            <button type="submit" style={{ margin: "20px 10px" }}>
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     </div>

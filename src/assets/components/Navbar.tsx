@@ -7,14 +7,18 @@ import { Link } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router";
-
+import brain from "../images/ElevateBrain.png";
 function Navbar() {
   const navi = useNavigate();
   return (
-    <AppBar position="static" style={{ width: "100%" }}>
+    <AppBar position="static" style={{ width: "100%", background: "#03254c" }}>
       <Toolbar>
         <Typography variant="h6" style={{ flexGrow: 1 }}>
-          Elevate
+          <img
+            src={brain}
+            alt="Descriptive Alt Text"
+            style={{ maxWidth: "50px", maxHeight: "50px" }}
+          />
         </Typography>
         <Button color="inherit" component={Link} to="/logging">
           Log Workout

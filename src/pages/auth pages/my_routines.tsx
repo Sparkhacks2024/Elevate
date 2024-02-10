@@ -144,7 +144,7 @@ function MyRoutine({ Token }: any) {
           backgroundSize: "cover",
           backgroundPosition: "left top",
           height: "100%",
-          backgroundColor: "white",
+          backgroundColor: "#d0efff",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -207,23 +207,27 @@ function MyRoutine({ Token }: any) {
             height: "600px",
             display: "flex",
             overflowY: "auto",
+            background: "white",
             position: "relative",
             flexDirection: "column",
             scrollbarWidth: "none",
             msOverflowStyle: "none",
           }}
         >
-          <button
+          <Button
+            variant="outlined"
+            color="neutral"
             style={{
               position: "absolute",
-              top: "5px",
-              right: "5px",
-              width: "50px",
+              top: "10px",
+              right: "10px",
+              width: "40px",
             }}
             onClick={() => setmodalOpen(true)}
+            sx={{ width: "35px", height: "20px" }}
           >
-            +
-          </button>
+            <Add />
+          </Button>
           <div style={{ marginTop: "50px" }}></div>
           {routines.map((routine: any, index: any) => (
             <button

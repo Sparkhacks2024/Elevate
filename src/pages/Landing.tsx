@@ -17,6 +17,7 @@ const Landing = ({ setToken }) => {
       <div
         style={{
           display: "flex", // Enable flexbox
+          flexDirection: "column",
           justifyContent: "center", // Center horizontally
           alignItems: "center", // Center vertically
           height: "100vh", // Full viewport height
@@ -29,6 +30,17 @@ const Landing = ({ setToken }) => {
           alt="Descriptive Alt Text"
           style={{ maxWidth: "100%", maxHeight: "100%" }}
         />
+        <h1
+          style={{
+            fontSize: "40px",
+            fontWeight: "700",
+            textAlign: "center",
+            margin: "5px 0",
+            fontFamily: "Poppins, sans-serif",
+          }}
+        >
+          ELEVATE
+        </h1>
 
         <Modal
           aria-labelledby="modal-title"
@@ -41,28 +53,7 @@ const Landing = ({ setToken }) => {
             alignItems: "center",
           }}
         >
-          <Sheet
-            variant="outlined"
-            sx={{
-              maxWidth: 500,
-              borderRadius: "md",
-              p: 3,
-              boxShadow: "lg",
-            }}
-          >
-            <ModalClose variant="plain" sx={{ m: 1 }} />
-            <Typography
-              component="h2"
-              id="modal-title"
-              level="h4"
-              textColor="inherit"
-              fontWeight="lg"
-              mb={1}
-            >
-              This is the modal title
-            </Typography>
-            <Login setToken={setToken} />
-          </Sheet>
+          <Login setToken={setToken} />
         </Modal>
         <button
           onClick={butfun}
@@ -76,67 +67,6 @@ const Landing = ({ setToken }) => {
         </button>
       </div>
     </>
-
-    /*
-    <>
-      <div
-        style={{
-          backgroundSize: "cover",
-          backgroundPosition: "left top",
-          height: "100%",
-          overflow: "scroll",
-          // backgroundColor: "#2d3238",
-          backgroundColor: "white",
-        }}
-      >
-        <Modal
-          aria-labelledby="modal-title"
-          aria-describedby="modal-desc"
-          open={openModal}
-          onClose={() => setModal(false)}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Sheet
-            variant="outlined"
-            sx={{
-              maxWidth: 500,
-              borderRadius: "md",
-              p: 3,
-              boxShadow: "lg",
-            }}
-          >
-            <ModalClose variant="plain" sx={{ m: 1 }} />
-            <Typography
-              component="h2"
-              id="modal-title"
-              level="h4"
-              textColor="inherit"
-              fontWeight="lg"
-              mb={1}
-            >
-              This is the modal title
-            </Typography>
-            <Login setToken={setToken} />
-          </Sheet>
-        </Modal>
-        <button
-          onClick={butfun}
-          style={{
-            position: "absolute",
-            right: "15px",
-            top: "15px",
-          }}
-        >
-          Log In
-        </button>
-
-      </div>
-    </>
-    */
   );
 };
 
