@@ -5,7 +5,8 @@ import { useState } from "react";
 
 import Login from "../assets/components/login";
 import brain from "../assets/images/ElevateBrain.png";
-
+// landing page
+// contains logo and welcome message
 const Landing = ({ setToken }: any) => {
   const [openModal, setModal] = useState<any>(false);
 
@@ -17,11 +18,11 @@ const Landing = ({ setToken }: any) => {
     <>
       <div
         style={{
-          display: "flex", // Enable flexbox
+          display: "flex",
           flexDirection: "column",
-          justifyContent: "center", // Center horizontally
-          alignItems: "center", // Center vertically
-          height: "100vh", // Full viewport height
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
           overflow: "scroll",
           backgroundColor: "#212121",
         }}
@@ -30,12 +31,33 @@ const Landing = ({ setToken }: any) => {
           src={brain}
           className="logo"
           alt="Descriptive Alt Text"
-          style={{ maxWidth: "100%", maxHeight: "100%", position: "absolute" }}
+          style={{
+            maxWidth: "100%",
+            maxHeight: "100%",
+            position: "absolute",
+            bottom: 0,
+            right: 5,
+          }}
         />
-        <div style={{ zIndex: 2, background: "white" }}>
+        <div
+          style={{
+            zIndex: 2,
+            width: "500px",
+            height: "400px",
+            borderRadius: "90%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            position: "absolute",
+            top: 0,
+            left: 20,
+            padding: "20p",
+          }}
+        >
           <h1
             style={{
-              color: "#212121",
+              color: "white",
               fontSize: "40px",
               fontWeight: "700",
               textAlign: "center",
@@ -46,7 +68,7 @@ const Landing = ({ setToken }: any) => {
           >
             ELEVATE
           </h1>
-          <Typography sx={{ color: "#212121", zIndex: 3 }}>
+          <Typography sx={{ color: "white", zIndex: 3 }}>
             Unlock the secret to a happier, healthier you with exercise! Wave
             goodbye to stress and welcome a boost in mood, thanks to the magic
             of endorphins. From enhancing sleep to sharpening your mind, regular

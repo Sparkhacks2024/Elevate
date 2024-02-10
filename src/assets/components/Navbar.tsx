@@ -8,6 +8,8 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router";
 import brain from "../images/ElevateBrain.png";
+
+//Navbar that is present throughout app while user logged in
 function Navbar() {
   const navi = useNavigate();
   return (

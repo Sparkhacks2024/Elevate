@@ -6,14 +6,6 @@
 
 //NEED TO STYLE the lists
 
-//x=data[0].Routine gives the array of objects
-//x[0] gives the first element in the object then
-//x[0].Name is the Name of the routine
-//x[0].routine will give the array of exercises
-//x[0].routine[0] will give the first exercise in that routine
-//x[0].rotuine[0].Exercise will give the name of the first exercise for that routine
-//x[0].routine[0].Sets will give sets for that routine and then Reps will give Reps and so on
-
 import Input from "@mui/joy/Input";
 import Modal from "@mui/joy/Modal";
 import ModalClose from "@mui/joy/ModalClose";
@@ -39,6 +31,7 @@ import {
 } from "@mui/joy";
 import Add from "@mui/icons-material/Add";
 
+// page to set/create workout routines
 function MyRoutine({ Token }: any) {
   const [routines, setRoutines] = useState<any>([]);
 
@@ -74,8 +67,6 @@ function MyRoutine({ Token }: any) {
     setDrawerOpen(true);
     setexpandedroutine(routineName);
   };
-
-  ///
 
   //handles the submit for adding the routines -DONE
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -357,9 +348,9 @@ function MyRoutine({ Token }: any) {
                             level="h4"
                             fontWeight={400}
                             sx={{
-                              fontSize: "16px", // Default font size
+                              fontSize: "16px",
                               "@media (max-width: 600px)": {
-                                fontSize: "13px", // Adjust font size for smaller screens
+                                fontSize: "13px",
                               },
                             }}
                           >
@@ -372,11 +363,11 @@ function MyRoutine({ Token }: any) {
                           </Typography>
                           <EditIcon
                             sx={{
-                              width: "15px", // Default width
-                              height: "15px", // Default height
+                              width: "15px",
+                              height: "15px",
                               "@media (min-width: 1234px)": {
-                                width: "15px", // Adjust width for larger screens
-                                height: "15px", // Adjust height for larger screens
+                                width: "15px",
+                                height: "15px",
                               },
                             }}
                           />

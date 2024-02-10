@@ -23,7 +23,7 @@ import "../../index.css";
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-//Start of the function
+//page for logging workout of predefined routines
 function Logging({ Token }: any) {
   const [Routines, setRoutines] = useState<any>([]);
   const [Todayroutine, setTodayroutine] = useState<any>(null);

@@ -7,6 +7,8 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import Fourofour from "./pages/Fourofour.tsx";
 import CalendarWrapper from "./pages/auth pages/Calendarwrapper.tsx";
+
+//App.tsx root compnent of our app
 const App = () => {
   const tokenCookie = Cookies.get("Token");
   const [Token, setToken] = useState(
@@ -21,7 +23,8 @@ const App = () => {
     }
   }, [Token]);
 
-  //return everything else
+  //set up routing for each page
+  // check session token to see if user is logged in
   return (
     <BrowserRouter>
       <Routes>

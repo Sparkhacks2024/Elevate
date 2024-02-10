@@ -1,6 +1,7 @@
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
+
+//404 page if user is not logged in or page not found
 const Fourofour = () => {
   const navi = useNavigate();
   return (
