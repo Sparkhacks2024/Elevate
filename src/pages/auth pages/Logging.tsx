@@ -32,13 +32,13 @@ function Logging({ Token }: any) {
   const [deleteindex, setdeleteindex] = useState<any>(null);
 
   //getting todays date
-  const x = dayjs().startOf("day").format("YYYY-MM-DD");
+
   const fetchdata = async () => {
     const { data } = await supabase
       .from("logs")
       .select("todays_lifts")
       .eq("uuid", Token.user.id)
-      .eq("created_at", x);
+      .eq("created_at", dayjs().startOf("day").format("YYYY-MM-DD"));
 
     if (data?.length === 0) {
       console.log("empty");
@@ -63,6 +63,7 @@ function Logging({ Token }: any) {
   return (
     <>
       <Navbar />
+
       <div
         style={{
           backgroundSize: "cover",
