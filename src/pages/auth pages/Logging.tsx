@@ -26,34 +26,37 @@ function Logging({ Token }: any) {
   const [Routines, setRoutines] = useState<any>([]);
   const [Todayroutine, setTodayroutine] = useState<any>(null);
   const [opendeletemodal, setopendeletemodal] = useState<any>(false);
+  const [teststate, settest] = useState<any>(false);
+  const [deleteindex, setdeleteindex] = useState<any>(null);
 
   //getting todays date
   const x = dayjs().startOf("day").format("YYYY-MM-DD");
-  useEffect(() => {
-    const fetchdata = async () => {
-      const { data } = await supabase
-        .from("logs")
-        .select("todays_lifts")
-        .eq("uuid", Token.user.id)
-        .eq("created_at", x);
+  const fetchdata = async () => {
+    const { data } = await supabase
+      .from("logs")
+      .select("todays_lifts")
+      .eq("uuid", Token.user.id)
+      .eq("created_at", x);
 
-      if (data?.length === 0) {
-        console.log("empty");
-        const { data } = await supabase
-          .from("userprofiles")
-          .select("Routines")
-          .eq("id", Token.user.id);
-        if (data && data?.length > 0) {
-          setRoutines(data[0].Routines);
-        }
-      } else {
-        if (data) {
-          setTodayroutine(data[0].todays_lifts);
-        }
+    if (data?.length === 0) {
+      console.log("empty");
+      const { data } = await supabase
+        .from("userprofiles")
+        .select("Routines")
+        .eq("id", Token.user.id);
+      if (data && data?.length > 0) {
+        setRoutines(data[0].Routines);
       }
-    };
+    } else {
+      if (data) {
+        setTodayroutine(data[0].todays_lifts);
+      }
+    }
+  };
+
+  useEffect(() => {
     fetchdata();
-  }, []);
+  }, [teststate]);
 
   return (
     <>
@@ -124,7 +127,39 @@ function Logging({ Token }: any) {
                   <Button
                     variant="solid"
                     color="danger"
-                    onClick={() => setopendeletemodal(false)}
+                    onClick={() => {
+                      Todayroutine.routine.splice(deleteindex, 1);
+                      const temp = Todayroutine;
+                      setopendeletemodal(false);
+                      if (temp.routine.length === 0) {
+                        const update = async () => {
+                          await supabase
+                            .from("logs")
+                            .delete()
+                            .eq("uuid", Token.user.id)
+                            .eq(
+                              "created_at",
+                              dayjs().startOf("day").format("YYYY-MM-DD")
+                            );
+                          settest(!teststate);
+                          setTodayroutine(null);
+                        };
+                        update();
+                      } else {
+                        console.log("here", Todayroutine);
+                        const update = async () => {
+                          await supabase
+                            .from("logs")
+                            .update({ todays_lifts: temp })
+                            .eq("uuid", Token.user.id)
+                            .eq(
+                              "created_at",
+                              dayjs().startOf("day").format("YYYY-MM-DD")
+                            );
+                        };
+                        update();
+                      }
+                    }}
                   >
                     Delete
                   </Button>
@@ -152,10 +187,7 @@ function Logging({ Token }: any) {
               </thead>
               <tbody>
                 {Todayroutine.routine.map((item: any, index: any) => (
-                  <tr
-                    key={index}
-                    className={item.Complete ? "table-success" : ""}
-                  >
+                  <tr key={index}>
                     <td>
                       <Button
                         color="danger"
@@ -168,13 +200,8 @@ function Logging({ Token }: any) {
                           maxHeight: "24px",
                         }}
                         onClick={() => {
+                          setdeleteindex(index);
                           setopendeletemodal(true);
-                          setTodayroutine((prevState: any) => ({
-                            ...prevState,
-                            routine: prevState.routine.filter(
-                              (item: any, i: any) => i !== index
-                            ),
-                          }));
                         }}
                       >
                         <CloseIcon sx={{ fontSize: "15px" }} />
@@ -189,6 +216,26 @@ function Logging({ Token }: any) {
                         color="primary"
                         defaultChecked={item.Complete ? true : false}
                         sx={{ marginLeft: "20px" }}
+                        onChange={(event) => {
+                          if (event.target.checked) {
+                            Todayroutine.routine[index].Complete = true;
+                          } else {
+                            Todayroutine.routine[index].Complete = false;
+                          }
+
+                          const temp = Todayroutine;
+                          const update = async () => {
+                            await supabase
+                              .from("logs")
+                              .update({ todays_lifts: temp })
+                              .eq("uuid", Token.user.id)
+                              .eq(
+                                "created_at",
+                                dayjs().startOf("day").format("YYYY-MM-DD")
+                              );
+                          };
+                          update();
+                        }}
                       />
                     </td>
                   </tr>
