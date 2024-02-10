@@ -27,6 +27,7 @@ import DialogContent from "@mui/joy/DialogContent";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Navbar from "../../assets/components/Navbar";
+import "bootstrap/dist/css/bootstrap.css";
 
 import {
   Divider,
@@ -200,8 +201,10 @@ function MyRoutine({ Token }: any) {
         {/* display div */}
 
         <div
+          className="card-1"
           style={{
             marginTop: "100px",
+            borderRadius: "10px",
             border: "solid 1px black",
             width: "calc(400px + 16px)",
             height: "600px",
@@ -233,8 +236,8 @@ function MyRoutine({ Token }: any) {
             <button
               key={index}
               onClick={() => checkClick(index)}
+              className="sayhello"
               style={{
-                background: "#212121",
                 margin: "10px",
                 padding: "10px",
                 borderRadius: "20px",
