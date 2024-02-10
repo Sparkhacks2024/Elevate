@@ -10,6 +10,13 @@ import Option from "@mui/joy/Option";
 import "bootstrap/dist/css/bootstrap.css";
 import Button from "@mui/joy/Button";
 import CloseIcon from "@mui/icons-material/Close";
+import Modal from "@mui/joy/Modal";
+import ModalDialog from "@mui/joy/ModalDialog";
+import DialogTitle from "@mui/joy/DialogTitle";
+import Divider from "@mui/joy/Divider";
+import DialogContent from "@mui/joy/DialogContent";
+import DialogActions from "@mui/joy/DialogActions";
+import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
@@ -17,6 +24,7 @@ import CloseIcon from "@mui/icons-material/Close";
 function Logging({ Token }: any) {
   const [Routines, setRoutines] = useState<any>([]);
   const [Todayroutine, setTodayroutine] = useState<any>(null);
+  const [opendeletemodal, setopendeletemodal] = useState<any>(false);
 
   //getting todays date
   const x = dayjs().startOf("day").format("YYYY-MM-DD");
@@ -96,6 +104,38 @@ function Logging({ Token }: any) {
         </div>
       ) : (
         <div style={{ marginTop: "100px", border: "" }}>
+          <Modal
+            open={opendeletemodal}
+            onClose={() => setopendeletemodal(false)}
+          >
+            <ModalDialog variant="outlined" role="alertdialog">
+              <DialogTitle>
+                <WarningRoundedIcon />
+                Confirmation
+              </DialogTitle>
+              <Divider />
+              <DialogContent>
+                Are you sure you want to delete this Exercise?
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  variant="solid"
+                  color="danger"
+                  onClick={() => setopendeletemodal(false)}
+                >
+                  Delete
+                </Button>
+                <Button
+                  variant="plain"
+                  color="neutral"
+                  onClick={() => setopendeletemodal(false)}
+                >
+                  Cancel
+                </Button>
+              </DialogActions>
+            </ModalDialog>
+          </Modal>
+          <h3 style={{ marginLeft: "10px" }}>{Todayroutine.Name}</h3>
           <table className="table">
             <thead>
               <tr>
@@ -109,11 +149,30 @@ function Logging({ Token }: any) {
             </thead>
             <tbody>
               {Todayroutine.routine.map((item: any, index: any) => (
-                <tr className={item.Complete ? "table-success" : ""}>
+                <tr
+                  key={index}
+                  className={item.Complete ? "table-success" : ""}
+                >
                   <td>
                     <Button
+                      color="danger"
                       size="sm"
-                      sx={{ minWidth: 0, width: "24px", height: "10px", p: 0 }}
+                      sx={{
+                        minWidth: 0,
+                        width: "30px",
+                        height: "24px",
+                        p: 0,
+                        maxHeight: "24px",
+                      }}
+                      onClick={() => {
+                        setopendeletemodal(true);
+                        setTodayroutine((prevState: any) => ({
+                          ...prevState,
+                          routine: prevState.routine.filter(
+                            (item: any, i: any) => i !== index
+                          ),
+                        }));
+                      }}
                     >
                       <CloseIcon sx={{ fontSize: "15px" }} />
                     </Button>

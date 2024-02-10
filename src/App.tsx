@@ -24,8 +24,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route index element={<Landing />} />
-        {/* <Route path="/home" element={<Home character={Characteristicble} />} />
-        <Route path="/test" element={<Test character={Characteristicble} />} /> */}
+
         <Route path="/home" element={<Login setToken={setToken} />} />
         <Route path="/routine" element={<Routine Token={Token} />} />
         <Route path="/logging" element={<Logging Token={Token} />} />
